@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - EduPlatform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            /* Light theme colors */
+            --bg-primary: #fff5f8;
+            --bg-secondary: #ffd6e0;
+            --bg-card: rgba(255, 255, 255, 0.15);
+            --text-primary: #333;
+            --text-secondary: #7f8c8d;
+            --header-bg: rgba(255, 255, 255, 0.7);
+            --button-primary: #f3255f;
+            --button-primary-hover: #db0944;
+            --button-secondary: rgba(255, 255, 255, 0.2);
+            --button-secondary-hover: rgba(255, 255, 255, 0.3);
+            --star-color: #fff;
+            --star-shadow: rgba(243, 37, 95, 0.8);
+            --input-border: rgba(255, 255, 255, 0.2);
+            --input-focus: #f3255f;
+            --input-focus-shadow: rgba(243, 37, 95, 0.2);
+            --auth-footer-border: rgba(255, 255, 255, 0.1);
+            --illustration-bg: rgba(255, 240, 244, 0.2);
+            --accent-color: #f3255f;
+            --accent-hover: #db0944;
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px 0 rgba(243, 37, 95, 0.15);
+        }
+        [data-theme="dark"] {
+            /* Dark theme colors */
+            --bg-primary: #1a0d13;
+            --bg-secondary: #2d161f;
+            --bg-card: rgba(30, 30, 40, 0.15);
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --header-bg: rgba(30, 30, 40, 0.7);
+            --button-primary: #f3255f;
+            --button-primary-hover: #db0944;
+            --button-secondary: rgba(50, 50, 60, 0.3);
+            --button-secondary-hover: rgba(50, 50, 60, 0.5);
+            --star-color: #ffb6c1;
+            --star-shadow: rgba(243, 37, 95, 0.8);
+            --input-border: rgba(255, 255, 255, 0.1);
+            --input-focus: #f3255f;
+            --input-focus-shadow: rgba(243, 37, 95, 0.2);
+            --auth-footer-border: rgba(255, 255, 255, 0.05);
+            --illustration-bg: rgba(31, 15, 21, 0.3);
+            --accent-color: #f3255f;
+            --accent-hover: #db0944;
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 8px 32px 0 rgba(243, 37, 95, 0.25);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        body {
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Animated background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .bg-animation span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(243, 37, 95, 0.1);
+            animation: move 25s linear infinite;
+            bottom: -150px;
+            border-radius: 50%;
+        }
+        
+        .bg-animation span:nth-child(1) {
+            left: 25%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 0s;
+        }
+        
+        .bg-animation span:nth-child(2) {
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+        
+        .bg-animation span:nth-child(3) {
+            left: 70%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 4s;
+        }
+        
+        .bg-animation span:nth-child(4) {
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+            animation-duration: 18s;
+        }
+        
+        .bg-animation span:nth-child(5) {
+            left: 65%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 0s;
+        }
+        
+        .bg-animation span:nth-child(6) {
+            left: 75%;
+            width: 110px;
+            height: 110px;
+            animation-delay: 3s;
+        }
+        
+        .bg-animation span:nth-child(7) {
+            left: 35%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 7s;
+        }
+        
+        .bg-animation span:nth-child(8) {
+            left: 50%;
+            width: 25px;
+            height: 25px;
+            animation-delay: 15s;
+            animation-duration: 45s;
+        }
+        
+        .bg-animation span:nth-child(9) {
+            left: 20%;
+            width: 15px;
+            height: 15px;
+            animation-delay: 2s;
+            animation-duration: 35s;
+        }
+        
+        .bg-animation span:nth-child(10) {
+            left: 85%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 0s;
+            animation-duration: 11s;
+        }
+        
+        @keyframes move {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 50%;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
+        
+        /* Star cursor effect */
+        .stars-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: var(--star-color);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: twinkle 0.8s ease-in-out forwards;
+            box-shadow: 0 0 10px 2px var(--star-shadow);
+        }
+        
+        @keyframes twinkle {
+            0% {
+                transform: scale(0);
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+        
+        /* Header Styles */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 40px;
+            background-color: var(--header-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid var(--glass-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            margin-right: 15px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.6s;
+        }
+        
+        .logo:hover::before {
+            left: 100%;
+        }
+        
+        .logo:hover {
+            box-shadow: 0 0 15px #af4e69;
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            background: var(--button-secondary);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+            font-size: 20px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        .theme-toggle:hover {
+            background-color: rgba(243, 37, 95, 0.2);
+            animation: rotate 0.5s ease-in-out;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .theme-toggle::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .theme-toggle:hover::before {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .back-btn {
+            background: linear-gradient(135deg, var(--button-primary), var(--button-primary-hover));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 15px;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .back-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+            z-index: -1;
+        }
+        
+        .back-btn:hover::before {
+            transform: translateX(0);
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(243, 37, 95, 0.4);
+        }
+        
+        /* Main Content */
+        .container {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .auth-container {
+            display: flex;
+            background: var(--bg-card);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 15px;
+            box-shadow: var(--glass-shadow);
+            border: 1px solid var(--glass-border);
+            width: 100%;
+            max-width: 1000px;
+            overflow: hidden;
+            animation: fadeIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            position: relative;
+        }
+        
+        .auth-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--button-primary), var(--button-primary-hover));
+            border-radius: 5px 5px 0 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .auth-container:hover::before {
+            opacity: 1;
+        }
+        
+        .auth-container::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(243, 37, 95, 0.1) 0%, rgba(243, 37, 95, 0) 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .auth-container:hover::after {
+            opacity: 1;
+        }
+        
+        .illustration {
+            flex: 1;
+            background-color: var(--illustration-bg);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .illustration-image {
+            width: 100%;
+            height: 320px;
+            background-image: url('https://firebasestorage.googleapis.com/v0/b/ava-e6c94.appspot.com/o/cau-dieu-kien-loai-2-Photoroom.png?alt=media&token=bbf428f7-e862-4b53-b5db-d1a5810e5233');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            transition: transform 0.5s ease;
+        }
+        
+        .illustration-image:hover {
+            transform: scale(1.02);
+        }
+        
+        .illustration-text {
+            text-align: center;
+            color: var(--text-primary);
+            padding: 0 20px;
+        }
+        
+        .illustration-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--button-primary), var(--button-primary-hover));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .illustration-description {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .form-container {
+            flex: 1;
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 2;
+        }
+        
+        .auth-header {
+            margin-bottom: 35px;
+        }
+        
+        .auth-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .auth-subtitle {
+            color: var(--text-secondary);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group {
+            margin-bottom: 22px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--input-border);
+            border-radius: 8px;
+            font-size: 16px;
+            background: var(--button-secondary);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            color: var(--text-primary);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .form-input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(243, 37, 95, 0.2);
+            outline: none;
+            transform: translateY(-2px);
+        }
+        
+        .password-container {
+            position: relative;
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+        
+        .password-toggle:hover {
+            color: var(--accent-color);
+        }
+        
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        /* Checkbox styling */
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .checkbox-container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+        
+        .checkmark {
+            position: relative;
+            display: inline-block;
+            height: 20px;
+            width: 20px;
+            background-color: var(--button-secondary);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+        
+        .checkbox-container:hover .checkmark {
+            background-color: var(--button-secondary-hover);
+        }
+        
+        .checkbox-container input:checked ~ .checkmark {
+            background: linear-gradient(135deg, var(--button-primary), var(--button-primary-hover));
+        }
+        
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 7px;
+            top: 3px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+        
+        .checkbox-container input:checked ~ .checkmark:after {
+            display: block;
+            animation: checkmark 0.3s ease-in-out;
+        }
+        
+        @keyframes checkmark {
+            0% {
+                transform: rotate(45deg) scale(0);
+            }
+            50% {
+                transform: rotate(45deg) scale(1.2);
+            }
+            100% {
+                transform: rotate(45deg) scale(1);
+            }
+        }
+        
+        .forgot-password {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .forgot-password::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        
+        .forgot-password:hover::after {
+            width: 100%;
+        }
+        
+        .forgot-password:hover {
+            color: var(--accent-hover);
+        }
+        
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-submit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+            z-index: -1;
+        }
+        
+        .btn-submit:hover::before {
+            transform: translateX(0);
+        }
+        
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(243, 37, 95, 0.4);
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid var(--auth-footer-border);
+        }
+        
+        .auth-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .auth-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        
+        .auth-link:hover::after {
+            width: 100%;
+        }
+        
+        .auth-link:hover {
+            color: var(--accent-hover);
+        }
+        
+        /* Social Login */
+        .social-login {
+            margin-top: 25px;
+            text-align: center;
+        }
+        
+        .social-title {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .social-title::before,
+        .social-title::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background-color: var(--auth-footer-border);
+        }
+        
+        .social-title::before {
+            left: 0;
+        }
+        
+        .social-title::after {
+            right: 0;
+        }
+        
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .social-btn:hover::after {
+            width: 100px;
+            height: 100px;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .social-btn.google {
+            background-color: #db4437;
+        }
+        
+        .social-btn.facebook {
+            background-color: #3b5998;
+        }
+        
+        .social-btn.twitter {
+            background-color: #1da1f2;
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+            
+            .auth-container {
+                flex-direction: column;
+                max-width: 450px;
+            }
+            
+            .illustration {
+                padding: 20px;
+            }
+            
+            .illustration-image {
+                height: 200px;
+            }
+            
+            .form-container {
+                padding: 30px 20px;
+            }
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    
+    <div class="stars-cursor" id="starsCursor"></div>
+    
+    <header class="header">
+        <div class="logo-container">
+            <img class="logo" src="image/logo.png" alt="none">
+        </div>
+        <div class="header-controls">
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                <i class="fas fa-moon"></i>
+            </button>
+            <a href="index.html" class="back-btn">Back to Home</a>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="auth-container">
+            <div class="illustration">
+                <div class="illustration-image"></div>
+                <div class="illustration-text">
+                    <h2 class="illustration-title">Welcome to Learning Journey</h2>
+                    <p class="illustration-description">Access your personalized courses, track your progress, and connect with educators worldwide.</p>
+                </div>
+            </div>
+            <div class="form-container">
+                <div class="auth-header">
+                    <h1 class="auth-title">ĐĂNG NHẬP</h1>
+                    <p class="auth-subtitle">Chào mừng bạn trở lại</p>
+                </div>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Tên tài khoản</label>
+                        <input type="email" id="email" class="form-input" placeholder="Nhập tên tài khoản" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="form-label">Mật khẩu</label>
+                        <div class="password-container">
+                            <input type="password" id="password" class="form-input" placeholder="Nhập mật khẩu" required>
+                            <i class="fas fa-eye password-toggle" id="passwordToggle"></i>
+                        </div>
+                    </div>
+                    <div class="form-options">
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="remember">
+                            <span class="checkmark"></span>
+                            <label for="remember">Ghi nhớ đăng nhập</label>
+                        </div>
+                        <a href="#" class="forgot-password">Quên mật khẩu?</a>
+                    </div>
+                    <button type="submit" class="btn-submit">Đăng nhập</button>
+                </form>
+                <div class="social-login">
+                    <div class="social-title">Hoặc đăng nhập bằng</div>
+                    <div class="social-buttons">
+                        <button class="social-btn google"><i class="fab fa-google"></i></button>
+                        <button class="social-btn facebook"><i class="fab fa-facebook-f"></i></button>
+                        <button class="social-btn twitter"><i class="fab fa-twitter"></i></button>
+                    </div>
+                </div>
+                <div class="auth-footer">
+                    <p>Chưa có tài khoản? <a href="register.html" class="auth-link">Đăng ký ngay</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = themeToggle.querySelector('i');
+            
+            // Check for saved theme preference or default to light
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            
+            // Update icon based on current theme
+            if (currentTheme === 'dark') {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+            
+            themeToggle.addEventListener('click', function() {
+                // Get current theme
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                
+                // Toggle theme
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                
+                // Update theme
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                
+                // Update icon
+                if (newTheme === 'dark') {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                } else {
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                }
+            });
+            
+            // Star cursor effect
+            const starsCursor = document.getElementById('starsCursor');
+            let mouseX = 0;
+            let mouseY = 0;
+            let stars = [];
+            
+            document.addEventListener('mousemove', function(e) {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                
+                // Create star more frequently for better effect
+                if (Math.random() > 0.7) {
+                    createStar(mouseX, mouseY);
+                }
+            });
+            
+            function createStar(x, y) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                // Random size between 3px and 6px (larger stars)
+                const size = Math.random() * 3 + 3;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Random position within 30px radius of cursor (wider spread)
+                const offsetX = (Math.random() - 0.5) * 60;
+                const offsetY = (Math.random() - 0.5) * 60;
+                star.style.left = `${x + offsetX}px`;
+                star.style.top = `${y + offsetY}px`;
+                
+                // Get current theme for appropriate star color
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    // Dark theme: pink-ish stars to match button color
+                    const hue = Math.random() * 30 + 330; // Pink range
+                    star.style.backgroundColor = `hsl(${hue}, 100%, 70%)`;
+                    star.style.boxShadow = `0 0 ${size * 2}px ${size}px rgba(243, 37, 95, 0.8)`;
+                } else {
+                    // Light theme: brighter pink-ish stars
+                    const hue = Math.random() * 30 + 330; // Pink range
+                    star.style.backgroundColor = `hsl(${hue}, 100%, 80%)`;
+                    star.style.boxShadow = `0 0 ${size * 2}px ${size}px rgba(243, 37, 95, 1)`;
+                }
+                
+                starsCursor.appendChild(star);
+                stars.push(star);
+                
+                // Remove star after animation completes
+                setTimeout(() => {
+                    star.remove();
+                    stars = stars.filter(s => s !== star);
+                }, 800);
+                
+                // Limit number of stars to prevent performance issues
+                if (stars.length > 50) {
+                    const oldStar = stars.shift();
+                    oldStar.remove();
+                }
+            }
+            
+            const loginForm = document.getElementById('loginForm');
+            const passwordToggle = document.getElementById('passwordToggle');
+            const passwordInput = document.getElementById('password');
+            
+            // Toggle password visibility
+            passwordToggle.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.classList.toggle('fa-eye');
+                this.classList.toggle('fa-eye-slash');
+            });
+            
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                // Simple validation
+                if(email && password) {
+                    // Show success message
+                    const successMessage = document.createElement('div');
+                    successMessage.style.position = 'fixed';
+                    successMessage.style.top = '20px';
+                    successMessage.style.left = '50%';
+                    successMessage.style.transform = 'translateX(-50%)';
+                    successMessage.style.backgroundColor = '#2ecc71';
+                    successMessage.style.color = 'white';
+                    successMessage.style.padding = '15px 25px';
+                    successMessage.style.borderRadius = '8px';
+                    successMessage.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+                    successMessage.style.zIndex = '1000';
+                    successMessage.textContent = 'Đăng nhập thành công! Đang chuyển hướng...';
+                    
+                    document.body.appendChild(successMessage);
+                    
+                    // Redirect after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 2000);
+                }
+            });
+            
+            // Social login buttons
+            const socialButtons = document.querySelectorAll('.social-btn');
+            socialButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const platform = this.classList[1]; // google, facebook, or twitter
+                    const message = document.createElement('div');
+                    message.style.position = 'fixed';
+                    message.style.top = '20px';
+                    message.style.left = '50%';
+                    message.style.transform = 'translateX(-50%)';
+                    message.style.backgroundColor = '#f3255f';
+                    message.style.color = 'white';
+                    message.style.padding = '15px 25px';
+                    message.style.borderRadius = '8px';
+                    message.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+                    message.style.zIndex = '1000';
+                    message.textContent = `Đang chuyển hướng đến đăng nhập ${platform}...`;
+                    
+                    document.body.appendChild(message);
+                    
+                    // Remove message after 3 seconds
+                    setTimeout(() => {
+                        message.remove();
+                    }, 3000);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
